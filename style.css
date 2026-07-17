@@ -1,0 +1,369 @@
+Here is the **complete, fully updated, and unified** `style.css` file.
+
+This includes the energetic dark theme, the responsive grid layout, the animated hover gradients, and the **corrected circle-constrained profile photo cropping styles** so your team images sit beautifully inside the 90px circles without overflowing.
+
+### Complete `style.css`
+
+```css
+/* ==========================================================================
+   1. GLOBALS & RESET
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #05050a;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ==========================================================================
+   2. INTERACTIVE STARS BACKGROUND
+   ========================================================================== */
+#stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+/* ==========================================================================
+   3. HERO / HEADER SECTION
+   ========================================================================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.main-logo {
+    width: 220px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    border: 2px solid rgba(212, 175, 55, 0.5);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.brand-title {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #8A2BE2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0px 4px 10px rgba(255, 215, 0, 0.2));
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: #a0a0b0;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.group-badge {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(138, 43, 226, 0.2));
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 40px;
+    color: #ffd700;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.cta-btn {
+    padding: 14px 30px;
+    border-radius: 50px;
+    background: transparent;
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cta-btn:hover {
+    background: #ffd700;
+    color: #05050a;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   4. TEAM SECTION GRID
+   ========================================================================== */
+.team-section {
+    padding: 100px 5% 80px;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #a0a0b0;
+    font-size: 1.1rem;
+    margin-bottom: 60px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   5. UNIQUE MEMBER CARDS
+   ========================================================================== */
+.member-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+}
+
+.member-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Dynamic glow effects based on role hierarchy on hover */
+.member-card.chair:hover {
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+    border-color: #ffd700;
+}
+.member-card.vice-chair:hover {
+    box-shadow: 0 10px 30px rgba(192, 192, 192, 0.25);
+    border-color: #c0c0c0;
+}
+.member-card:not(.chair):not(.vice-chair):hover {
+    box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
+    border-color: #00bfff;
+}
+
+/* ==========================================================================
+   6. PERFECT CIRCLE PROFILE AVATARS
+   ========================================================================== */
+.member-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #15152a, #25254a);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden; /* Acts as a cookie-cutter to lock photos inside */
+    transition: border-color 0.3s ease;
+}
+
+/* Lock image inside the circle boundary */
+.member-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Centers and crops without stretching faces */
+    object-position: center;
+    border-radius: 50%;
+    z-index: 2; /* Sits over the initials */
+    transition: transform 0.3s ease;
+}
+
+/* Slight zoom-in on hover to make it feel responsive & energetic */
+.member-card:hover .member-photo {
+    transform: scale(1.08);
+}
+
+/* Fallback Initials (sits behind the image) */
+.avatar-initials {
+    font-size: 1.8rem;
+    font-weight: 800;
+    position: absolute;
+    z-index: 1;
+    background: linear-gradient(135deg, #a0a0b0, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Leader Roles - Mini Crowns/Stars */
+.gold-icon, .silver-icon {
+    position: absolute;
+    top: -10px;
+    font-size: 1.2rem;
+    z-index: 3; /* Always sits on top of the image */
+}
+.gold-icon {
+    color: #ffd700;
+    filter: drop-shadow(0 0 5px #ffd700);
+}
+.silver-icon {
+    color: #c0c0c0;
+    filter: drop-shadow(0 0 5px #c0c0c0);
+}
+
+/* Dynamic avatar border colors on card hover */
+.member-card.chair:hover .member-avatar { border-color: #ffd700; }
+.member-card.vice-chair:hover .member-avatar { border-color: #c0c0c0; }
+.member-card:not(.chair):not(.vice-chair):hover .member-avatar { border-color: #00bfff; }
+
+/* ==========================================================================
+   7. CARD TYPOGRAPHY & BADGES
+   ========================================================================== */
+.member-card h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+/* Distinctive colored badges */
+.role-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.role-badge.gold { background: rgba(212, 175, 55, 0.15); color: #ffd700; border: 1px solid rgba(212, 175, 55, 0.3); }
+.role-badge.silver { background: rgba(192, 192, 192, 0.15); color: #c0c0c0; border: 1px solid rgba(192, 192, 192, 0.3); }
+.role-badge.blue { background: rgba(0, 191, 255, 0.15); color: #00bfff; border: 1px solid rgba(0, 191, 255, 0.3); }
+.role-badge.purple { background: rgba(138, 43, 226, 0.15); color: #8a2be2; border: 1px solid rgba(138, 43, 226, 0.3); }
+.role-badge.cyan { background: rgba(0, 255, 255, 0.15); color: #00ffff; border: 1px solid rgba(0, 255, 255, 0.3); }
+.role-badge.violet { background: rgba(238, 130, 238, 0.15); color: #ee82ee; border: 1px solid rgba(238, 130, 238, 0.3); }
+.role-badge.pink { background: rgba(255, 105, 180, 0.15); color: #ff69b4; border: 1px solid rgba(255, 105, 180, 0.3); }
+
+.desc {
+    font-size: 0.9rem;
+    color: #a0a0b0;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    min-height: 80px; /* Aligns content visually */
+}
+
+/* Social links styling */
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.socials a {
+    color: #a0a0b0;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.socials a:hover {
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 1;
+    color: #606070;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.heart {
+    color: #ff3e3e;
+    display: inline-block;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ==========================================================================
+   9. RESPONSIVE LAYOUTS
+   ========================================================================== */
+@media (max-width: 768px) {
+    .brand-title {
+        font-size: 2.8rem;
+        letter-spacing: 8px;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    .team-grid {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
+}
